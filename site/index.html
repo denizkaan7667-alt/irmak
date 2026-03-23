@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IRMAK 😼</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #ffe6f2;
+      user-select: none;
+      overflow: hidden;
+      height: 100vh;
+    }
+
+    .wrapper {
+      display: flex;
+      height: 100vh;
+      padding: 20px;
+    }
+
+    .music-box {
+      width: 280px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+	  padding-top:280px ;
+    }
+
+    .music-box h2 {
+      color: #d63384;
+      margin-bottom: 10px;
+    }
+
+    .music-box iframe {
+      width: 100%;
+      height: 452px;
+      border-radius: 12px;
+    }
+
+    .content {
+      flex: 1;
+      padding-left: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      overflow: hidden;
+    }
+
+    h1 {
+      text-align: center;
+      color: #d63384;
+      font-size: 26px;
+      margin-bottom: 10px;
+    }
+
+    .gallery {
+         display: grid
+;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 14px;
+    overflow-y: auto;
+    flex-grow: 1;
+    padding-right: 10px;
+    justify-content: start;
+    align-content: stretch;
+    justify-items: end;
+    align-items: stretch;
+	  padding-top:200px ;
+}
+
+    .gallery img {
+      width: 250px;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
+      background-color: #fff;
+	  height:400px ;
+	
+    }
+
+    footer {
+      text-align: center;
+      font-size: 18px;
+      color: #d63384;
+      margin-top: 10px;
+    }
+
+    .heart {
+      position: absolute;
+      color: red;
+      font-size: 20px;
+      pointer-events: none;
+      animation: floatUp 1s ease-out forwards;
+    }
+
+    @keyframes floatUp {
+      0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-30px) scale(1.5);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="music-box">
+      <h2></h2>
+      <iframe src="https://open.spotify.com/embed/track/7Ikg74SQrxu5DMpEEbestg?utm_source=generator" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    </div>
+
+    <div class="content">
+      <h1> IRMAKKKK 💞</h1>
+      <div class="gallery">
+		<img src="images/irmak1.jfif" alt="Fotoğraf 1">
+        <img src="images/irmak2.jfif" alt="Fotoğraf 2">
+        <img src="images/irmak3.jfif" alt="Fotoğraf 3">
+        <img src="images/irmak4.jfif" alt="Fotoğraf 4">
+        <img src="images/irmak5.jfif" alt="Fotoğraf 5">
+        <img src="images/irmak6.jfif" alt="Fotoğraf 6">
+        <img src="images/irmak7.jfif" alt="Fotoğraf 7">
+      </div>
+      <footer> irmak </footer>
+    </div>
+  </div>
+
+  <script>
+    let isMouseDown = false;
+    let heartInterval;
+
+    document.addEventListener("mousedown", function (e) {
+      isMouseDown = true;
+      createHeart(e);
+      heartInterval = setInterval(() => createHeart(e), 500);
+    });
+
+    document.addEventListener("mouseup", function () {
+      isMouseDown = false;
+      clearInterval(heartInterval);
+    });
+
+    document.addEventListener("mousemove", function (e) {
+      if (isMouseDown) {
+        createHeart(e);
+      }
+    });
+
+    function createHeart(e) {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "❤️ IRMAK"
+      heart.style.left = `${e.clientX}px`;
+      heart.style.top = `${e.clientY}px`;
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 1000);
+    }
+  </script>
