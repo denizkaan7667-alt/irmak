@@ -1,1 +1,194 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IRMAK 😼</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #ffe6f2;
+      user-select: none;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .wrapper {
+      display: flex;
+      flex-direction: row;
+      padding: 20px;
+      gap: 30px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* --- MÜZİK KUTUSU --- */
+    .music-box {
+      width: 300px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 20px;
+      position: sticky;
+      top: 20px;
+      height: fit-content;
+    }
+
+    .music-box iframe {
+      width: 100%;
+      height: 400px;
+      border-radius: 20px;
+      box-shadow: 0px 10px 20px rgba(214, 51, 132, 0.2);
+      border: none;
+    }
+
+    /* --- İÇERİK --- */
+    .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    h1 {
+      text-align: center;
+      color: #d63384;
+      font-size: 32px;
+      margin-bottom: 25px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+      padding-bottom: 40px;
+    }
+
+    .gallery img {
+      width: 100%;
+      aspect-ratio: 1 / 1.2; /* Fotoğrafların daha estetik durması için */
+      object-fit: cover;
+      border-radius: 15px;
+      box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      background-color: white;
+      border: 5px solid white;
+    }
+
+    .gallery img:hover {
+      transform: translateY(-5px) scale(1.03);
+      box-shadow: 0px 8px 20px rgba(214, 51, 132, 0.3);
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      font-size: 20px;
+      color: #d63384;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+    /* --- KALP EFEKTİ --- */
+    .heart {
+      position: absolute;
+      color: #ff4d94;
+      font-size: 20px;
+      font-weight: bold;
+      pointer-events: none;
+      white-space: nowrap;
+      animation: floatUp 1s ease-out forwards;
+      z-index: 10000;
+      text-shadow: 0 0 5px white;
+    }
+
+    @keyframes floatUp {
+      0% { opacity: 1; transform: translateY(0) scale(1) rotate(0deg); }
+      100% { opacity: 0; transform: translateY(-100px) scale(1.5) rotate(15deg); }
+    }
+
+    /* --- MOBİL UYUMLULUK --- */
+    @media (max-width: 850px) {
+      .wrapper {
+        flex-direction: column;
+        padding: 15px;
+      }
+
+      .music-box {
+        width: 100%;
+        position: relative;
+        top: 0;
+        padding-top: 0;
+        margin-bottom: 20px;
+      }
+
+      .music-box iframe {
+        height: 152px; /* Mobilde yer kaplamaması için kompakt görünüm */
+      }
+
+      .gallery {
+        grid-template-columns: repeat(2, 1fr); /* Mobilde 2 sütun */
+        gap: 12px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="music-box">
+      <iframe src="https://open.spotify.com/embed/track/1di1BE6p47BkY49VQ898pI?utm_source=generator" 
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+              loading="lazy"></iframe>
+    </div>
+
+    <div class="content">
+      <h1> IRMAKKKK 💞</h1>
+      <div class="gallery">
+        <img src="images/irmak1.jfif" alt="Irmak 1">
+        <img src="images/irmak2.jfif" alt="Irmak 2">
+        <img src="images/irmak3.jfif" alt="Irmak 3">
+        <img src="images/irmak4.jfif" alt="Irmak 4">
+        <img src="images/irmak5.jfif" alt="Irmak 5">
+        <img src="images/irmak6.jfif" alt="Irmak 6">
+        <img src="images/irmak7.jfif" alt="Irmak 7">
+      </div>
+      <footer> ✨ IRMAK ✨ </footer>
+    </div>
+  </div>
+
+  <script>
+    function createHeart(x, y) {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "❤️ IRMAK";
+      heart.style.left = `${x}px`;
+      heart.style.top = `${y}px`;
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 1000);
+    }
+
+    // Fare tıklaması
+    document.addEventListener("mousedown", (e) => {
+      createHeart(e.pageX, e.pageY);
+    });
+
+    // Mobilde dokunma
+    document.addEventListener("touchstart", (e) => {
+      const touch = e.touches[0];
+      createHeart(touch.pageX, touch.pageY);
+    });
+  </script>
+</body>
+</html>
