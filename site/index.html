@@ -15,100 +15,121 @@
       font-family: Arial, sans-serif;
       background-color: #ffe6f2;
       user-select: none;
-      overflow: hidden;
-      height: 100vh;
+      /* Mobilde kaydırma yapabilmek için overflow: hidden'ı kaldırdık */
+      min-height: 100vh;
     }
 
     .wrapper {
       display: flex;
-      height: 100vh;
+      flex-direction: row; /* Masaüstünde yan yana */
       padding: 20px;
+      gap: 20px;
     }
 
+    /* --- MÜZİK KUTUSU --- */
     .music-box {
       width: 280px;
       display: flex;
       flex-direction: column;
       align-items: center;
-	  padding-top:280px ;
-    }
-
-    .music-box h2 {
-      color: #d63384;
-      margin-bottom: 10px;
+      padding-top: 20px;
     }
 
     .music-box iframe {
       width: 100%;
-      height: 452px;
+      height: 450px;
       border-radius: 12px;
+      box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
     }
 
+    /* --- İÇERİK --- */
     .content {
       flex: 1;
-      padding-left: 20px;
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
-      overflow: hidden;
     }
 
     h1 {
       text-align: center;
       color: #d63384;
       font-size: 26px;
-      margin-bottom: 10px;
+      margin-bottom: 20px;
     }
 
     .gallery {
-         display: grid
-;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 14px;
-    overflow-y: auto;
-    flex-grow: 1;
-    padding-right: 10px;
-    justify-content: start;
-    align-content: stretch;
-    justify-items: end;
-    align-items: stretch;
-	  padding-top:200px ;
-}
+      display: grid;
+      /* Masaüstünde 3 sütun, mobilde değişecek */
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 15px;
+      padding-bottom: 50px;
+    }
 
     .gallery img {
-      width: 250px;
+      width: 100%; /* Sabit px yerine %100 yaptık */
       aspect-ratio: 1 / 1;
       object-fit: cover;
       border-radius: 12px;
-      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
-      background-color: #fff;
-	  height:400px ;
-	
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.02);
     }
 
     footer {
       text-align: center;
+      padding: 20px;
       font-size: 18px;
       color: #d63384;
-      margin-top: 10px;
+      font-weight: bold;
     }
 
+    /* --- KALP EFEKTİ --- */
     .heart {
       position: absolute;
       color: red;
-      font-size: 20px;
+      font-size: 18px;
+      font-weight: bold;
       pointer-events: none;
+      white-space: nowrap;
       animation: floatUp 1s ease-out forwards;
+      z-index: 9999;
     }
 
     @keyframes floatUp {
-      0% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
+      0% { opacity: 1; transform: translateY(0) scale(1); }
+      100% { opacity: 0; transform: translateY(-50px) scale(1.5); }
+    }
+
+    /* --- MOBİL UYUMLULUK AYARLARI (Medya Sorgusu) --- */
+    @media (max-width: 768px) {
+      .wrapper {
+        flex-direction: column; /* Mobilde her şey alt alta */
+        padding: 10px;
       }
-      100% {
-        opacity: 0;
-        transform: translateY(-30px) scale(1.5);
+
+      .music-box {
+        width: 100%; /* Müzik kutusu tüm ekranı kaplasın */
+        padding-top: 0;
+      }
+
+      .music-box iframe {
+        height: 152px; /* Mobilde müzik kutusu çok yer kaplamasın diye küçülttük */
+      }
+
+      .content {
+        padding-left: 0;
+      }
+
+      .gallery {
+        grid-template-columns: repeat(2, 1fr); /* Mobilde yan yana 2 fotoğraf olsun */
+        gap: 10px;
+      }
+
+      h1 {
+        font-size: 20px;
+        margin-top: 10px;
       }
     }
   </style>
@@ -116,14 +137,13 @@
 <body>
   <div class="wrapper">
     <div class="music-box">
-      <h2></h2>
-      <iframe src="https://open.spotify.com/embed/track/7Ikg74SQrxu5DMpEEbestg?utm_source=generator" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <iframe src="https://open.spotify.com/embed/track/6UUE9Yxid81E8v9jH4UvFz?utm_source=generator" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
     </div>
 
     <div class="content">
       <h1> IRMAKKKK 💞</h1>
       <div class="gallery">
-		<img src="images/irmak1.jfif" alt="Fotoğraf 1">
+        <img src="images/irmak1.jfif" alt="Fotoğraf 1">
         <img src="images/irmak2.jfif" alt="Fotoğraf 2">
         <img src="images/irmak3.jfif" alt="Fotoğraf 3">
         <img src="images/irmak4.jfif" alt="Fotoğraf 4">
@@ -136,36 +156,27 @@
   </div>
 
   <script>
-    let isMouseDown = false;
-    let heartInterval;
-
-    document.addEventListener("mousedown", function (e) {
-      isMouseDown = true;
-      createHeart(e);
-      heartInterval = setInterval(() => createHeart(e), 500);
-    });
-
-    document.addEventListener("mouseup", function () {
-      isMouseDown = false;
-      clearInterval(heartInterval);
-    });
-
-    document.addEventListener("mousemove", function (e) {
-      if (isMouseDown) {
-        createHeart(e);
-      }
-    });
-
-    function createHeart(e) {
+    // Kalp efekti dokunmatik ekranlarda da çalışsın diye "touchstart" ekledik
+    function createHeart(x, y) {
       const heart = document.createElement("div");
       heart.classList.add("heart");
-      heart.innerHTML = "❤️ IRMAK"
-      heart.style.left = `${e.clientX}px`;
-      heart.style.top = `${e.clientY}px`;
+      heart.innerHTML = "❤️ IRMAK";
+      heart.style.left = `${x}px`;
+      heart.style.top = `${y}px`;
       document.body.appendChild(heart);
 
-      setTimeout(() => {
-        heart.remove();
-      }, 1000);
+      setTimeout(() => heart.remove(), 1000);
     }
+
+    document.addEventListener("mousedown", (e) => {
+      createHeart(e.clientX, e.clientY);
+    });
+
+    // Mobil dokunma desteği
+    document.addEventListener("touchstart", (e) => {
+      const touch = e.touches[0];
+      createHeart(touch.clientX, touch.clientY);
+    });
   </script>
+</body>
+</html>
